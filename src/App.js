@@ -28,7 +28,12 @@ const App = (props) => {
   return (
     <Router>
       <Row style={{ height: "100%" }}>
-        <Col lg={3} style={{ background: "#0C6EA5" }}>
+        <Col
+          lg={3}
+          style={{
+            background: "#0C6EA5",
+          }}
+        >
           <Row
             style={{
               marginTop: "80px",
