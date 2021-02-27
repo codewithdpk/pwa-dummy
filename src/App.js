@@ -25,25 +25,6 @@ const App = (props) => {
     { name: "Settings", slug: "/settings", logo: "/settings-logo.svg" },
   ];
 
-  // useEffect(() => {
-  //   // Gettting products data from dummy api
-  //   fetch("https://fakestoreapi.com/products")
-  //     .then((res) => res.json())
-  //     .then((json) => {
-  //       //setProducts(json);
-  //       console.log(json);
-  //       const n = 3;
-  //       const result = new Array(Math.ceil(json.length / n))
-  //         .fill()
-  //         .map((_) => json.splice(0, n));
-  //       setProducts(result);
-  //       console.log(result);
-  //     })
-  //     .catch((err) => {
-  //       alert(err.message);
-  //     });
-  // }, []);
-
   return (
     <Router>
       <Row style={{ height: "100%" }}>

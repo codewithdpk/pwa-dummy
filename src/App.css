@@ -36,3 +36,13 @@
   color: black;
   opacity: 50%;
 }
+
+.product-card {
+  width: 250px;
+  height: 380px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.29);
+  box-sizing: border-box;
+  border-radius: 5px;
+  margin-bottom: 25px;
+}
