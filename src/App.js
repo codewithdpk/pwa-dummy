@@ -48,7 +48,7 @@ const App = (props) => {
             </Col>
           </Row>
           <Row>
-            <Col lg={12} style={{ padding: "0" }}>
+            <Col lg={12} style={{ padding: "0" }} className="col-lg-offset-3">
               <ul
                 style={{
                   listStyleType: "none",
