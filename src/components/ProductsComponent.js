@@ -5,24 +5,45 @@ import { Button } from "react-bootstrap";
 
 const ProductComponent = () => {
   const [Products, setProducts] = useState([]);
+  const [DeviceType, setDeviceType] = useState("md");
+
+  const queries = {
+    xs: "(max-width: 320px)", // query for xs devices
+    sm: "(max-width: 720px)", // query for sm devices
+    md: "(max-width: 1024px)", // query for md devices
+  };
   useEffect(() => {
     // Gettting products data from dummy api
     fetch("https://fakestoreapi.com/products")
       .then((res) => res.json())
       .then((json) => {
         //setProducts(json);
-        console.log(json);
-        const n = 3;
-        const result = new Array(Math.ceil(json.length / n))
-          .fill()
-          .map((_) => json.splice(0, n));
-        setProducts(result);
-        console.log(result);
+        //console.log(json);
+
+        // Getting device type
+        if (window.innerWidth <= 760) {
+          setDeviceType("xs");
+          const n = 2;
+          const result = new Array(Math.ceil(json.length / n))
+            .fill()
+            .map((_) => json.splice(0, n));
+          setProducts(result);
+        } else {
+          setDeviceType("md");
+          const n = 3;
+          const result = new Array(Math.ceil(json.length / n))
+            .fill()
+            .map((_) => json.splice(0, n));
+          setProducts(result);
+        }
+
+        //console.log(result);
       })
       .catch((err) => {
         alert(err.message);
       });
   }, []);
+
   return (
     <div style={{ paddingTop: "100px", paddingLeft: "30px" }}>
       <Row>
@@ -37,7 +58,7 @@ const ProductComponent = () => {
           <Row>
             {row.map((product) => {
               return (
-                <Col lg={4}>
+                <Col lg={4} sm={6} xs={6}>
                   <div className="product-card">
                     <img
                       className="product-card-image"
@@ -50,7 +71,7 @@ const ProductComponent = () => {
                         {product.description}
                       </p>
                       <Row>
-                        <Col lg={6}>
+                        <Col lg={6} sm={6} xs={6}>
                           <span className="product-price">
                             $ {product.price}
                           </span>
@@ -64,7 +85,7 @@ const ProductComponent = () => {
                             </strike>
                           </span>
                         </Col>
-                        <Col lg={6}>
+                        <Col lg={6} sm={6} xs={6}>
                           <Button variant="primary" className="add-to-cart-btn">
                             <img
                               className="cart-icon"
