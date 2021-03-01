@@ -13,6 +13,7 @@ import { Row, Col } from "react-bootstrap";
 import ProductComponent from "./components/ProductsComponent";
 import OrdersComponent from "./components/OrdersComponent";
 import SettingsComponent from "./components/SettingsComponent";
+import ProductDetailsPage from "./components/ProductDetailsPage";
 
 const App = (props) => {
   // Store all products

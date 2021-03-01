@@ -2,16 +2,19 @@ import React, { useEffect, useState } from "react";
 import "../App.css";
 import { Row, Col } from "react-bootstrap";
 import { Button } from "react-bootstrap";
+import ProductDetailsPage from "./ProductDetailsPage";
 
 const ProductComponent = () => {
   const [Products, setProducts] = useState([]);
-  const [DeviceType, setDeviceType] = useState("md");
+  const [OpenProductView, setOpenProductView] = useState(false);
+  const [CurrentProductView, setCurrentProductView] = useState({});
+  //const [DeviceType, setDeviceType] = useState("md");
 
-  const queries = {
-    xs: "(max-width: 320px)", // query for xs devices
-    sm: "(max-width: 720px)", // query for sm devices
-    md: "(max-width: 1024px)", // query for md devices
-  };
+  // const queries = {
+  //   xs: "(max-width: 320px)", // query for xs devices
+  //   sm: "(max-width: 720px)", // query for sm devices
+  //   md: "(max-width: 1024px)", // query for md devices
+  // };
   useEffect(() => {
     // Gettting products data from dummy api
     fetch("https://fakestoreapi.com/products")
@@ -22,14 +25,14 @@ const ProductComponent = () => {
 
         // Getting device type
         if (window.innerWidth <= 760) {
-          setDeviceType("xs");
+          //setDeviceType("xs");
           const n = 2;
           const result = new Array(Math.ceil(json.length / n))
             .fill()
             .map((_) => json.splice(0, n));
           setProducts(result);
         } else {
-          setDeviceType("md");
+          //setDeviceType("md");
           const n = 3;
           const result = new Array(Math.ceil(json.length / n))
             .fill()
@@ -45,7 +48,7 @@ const ProductComponent = () => {
   }, []);
 
   return (
-    <div style={{ paddingTop: "100px", paddingLeft: "30px" }}>
+    <div className="products-container">
       <Row>
         <Col lg={12}>
           <h2 className="page-heading">Products</h2>
@@ -58,8 +61,14 @@ const ProductComponent = () => {
           <Row>
             {row.map((product) => {
               return (
-                <Col lg={4} sm={6} xs={6}>
-                  <div className="product-card">
+                <Col lg={4} sm={6} xs={6} style={{ margin: "0", padding: "0" }}>
+                  <div
+                    className="product-card"
+                    onClick={() => {
+                      setOpenProductView(true);
+                      setCurrentProductView(product);
+                    }}
+                  >
                     <img
                       className="product-card-image"
                       alt={product.name}
@@ -103,6 +112,11 @@ const ProductComponent = () => {
           </Row>
         );
       })}
+      <ProductDetailsPage
+        show={OpenProductView}
+        close={setOpenProductView}
+        product={CurrentProductView}
+      />
     </div>
   );
 };
